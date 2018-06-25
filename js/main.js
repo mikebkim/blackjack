@@ -3,6 +3,7 @@ var suits = ['s', 'c', 'd', 'h'];
 var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
 var masterDeck = buildMasterDeck();
+var playerBankrollNum = 1000;
 
 // /*----- app's state (variables) -----*/
 var shuffledDeck, playerHand, dealerHand;
@@ -19,15 +20,23 @@ var dealerScoreEl = document.querySelector('#dealer-section h3');
 var betControlEl = document.querySelector('#bet-deal-controls');
 var dealBtnEl = document.querySelector('#deal-btn');
 var hitControlEl = document.querySelector('#hit-stand-controls');
+var playerBankroll = document.getElementsByClassName('bankroll')[0];
+
+var betFive = document.querySelector(".bet-five");
+var betTwentyFive = document.querySelector(".bet-twentyfive");
+var betHundred = document.querySelector(".bet-hundred");
+var playerBetAmount = document.querySelector(".bet-amount");
 
 // /*----- event listeners -----*/
 dealBtnEl.addEventListener('click', handleDeal);
-betControlEl.addEventListener('click', betPlaced)
+betFive.addEventListener('click', betPlacedFive);
+betTwentyFive.addEventListener('click', betPlacedTwentyFive);
+betHundred.addEventListener('click', betPlacedHundred);
 
 // /*----- functions -----*/
 function initialize() {
   handInProgress = false;
-  bankroll = 1000;
+  playerBankroll.innerHTML = playerBankrollNum
   bet = 0;
   render();
 }
@@ -40,8 +49,28 @@ function render() {
   renderHands();
 }
 
-function betPlaced() {
+function betPlacedFive() {
+  bet += 5;
+  playerBetAmount.innerHTML = bet;
+  playerBankrollNum -= 5;
+  playerBankroll.innerHTML = playerBankrollNum
+  render();
+}
 
+function betPlacedTwentyFive() {
+  bet += 25;
+  playerBetAmount.innerHTML = bet;
+  playerBankrollNum -= 25;
+  playerBankroll.innerHTML = playerBankrollNum
+  render();
+}
+
+function betPlacedHundred() {
+  bet += 100;
+  playerBetAmount.innerHTML = bet;
+  playerBankrollNum -= 100;
+  playerBankroll.innerHTML = playerBankrollNum
+  render();
 }
 
 function handleDeal() {

@@ -14,11 +14,22 @@ div {
     font-family: 'Ewert', cursive;
     color: white;
     font-size: 20px;
+    padding: 0px 10px;
 }
 
-h2 {
-    text-align: center;
+h3 {
     font-family: 'Ewert', cursive;
+    text-align: center;
     color: white;
-    font-size: 50px;
+}
+
+section {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 30px 0px 0px 0px;
+}
+
+#hit-stand-controls {
+    padding: 10px 0px 10px 0px;
 }
