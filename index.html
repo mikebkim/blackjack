@@ -1,48 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="css/style.css">
-    <script defer src="js/main.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <title>Blackjack</title>
+    <link href="css/card-deck-css/css/cardstarter.min.css" rel="stylesheet" />
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Ewert" rel="stylesheet">
+    <script defer src="js/main.js"></script>
 </head>
 
 <body>
-        <h1>Blackjack</h1>
-        <div id="container">
-                <div class="images">
-                    <div id="playercards">
-                    </div>
-                    <div id="dealercards">
-                    </div>
-                </div>
-                <div class="buttons">
-                    <div class = "dealreset">
-                        <button id="dealBtn">Deal</button>
-                        <button id="resetBtn">Reset</button>
-                    </div>
-                    <div class = "hitstand">
-                        <button id="hitBtn">Hit</button>
-                        <button id="standBtn">Stand</button>
-                    </div>
-                </div>
-                <div class="sumdisplay">
-                    Your score :<input type="text" id="playersum" value="">
-                    Dealer score :<input type="text" id="dealersum" value="">
-                </div>
-                <div class="result">
-                    <div id="show">Result : <input type="text" id="resultbox"></div>
-                    <div id="counter">Wins Counter : <input type="number" id="winscounter"></div>
-                </div>
-            </div>
+
+    <h1>Blackjack</h1>
+
+    <div id="bet-deal-controls">
+        <button id="deal-btn">Deal</button>
+    </div>
+
+    <section id="dealer-section">
+        <h2>Dealer</h2>
+        <div class="cards"></div>
+        <h3></h3>
+    </section>
+
+    <section id="player-section">
+        <h2>Player</h2>
+        <div class="cards"></div>
+        <h3></h3>
+        <p></p>
+    </section>
     
-    <h2 class="bet-amount"></h2>
-    <button id="inc-btn">5</button>
-    <button id="inc-btn2">10</button>
-    <input type="text" size="6" id="bet">
+    <div>Bet Amount
+        <div>
+            <button>$5</button>
+            <button>$25</button>
+            <button>$100</button>
+        </div>
+    </div>
+
+    <div id="hit-stand-controls">
+        <button id="hit-btn">Hit</button>
+        <button id="stand-btn">Stand</button>
+    </div>
 </body>
 
 </html>

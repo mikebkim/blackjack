@@ -1,85 +1,92 @@
-/*----- constants -----*/
-var rank = 'A23456789TJQK';
-var suit = 'hcds';
-var cards = [];
-for (var s = 0; s < suit.length; s++) {
-    for (var f = 0; f < rank.length; f++) {
-        cards.push(rank[f] + suit[s]);
-    }
-}
+// /*----- constants -----*/
+var suits = ['s', 'c', 'd', 'h'];
+var ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 
-var suitDeck = {
-    'h': 'hearts',
-    'c': 'clubs',
-    'd': 'diamonds',
-    's': 'spades'
-}
+var masterDeck = buildMasterDeck();
 
-var rankDeck = {
-    'A': 'A',
-    '2': 'r02',
-    '3': 'r03',
-    '4': 'r04',
-    '5': 'r05',
-    '6': 'r06',
-    '7': 'r07',
-    '8': 'r08',
-    '9': 'r09',
-    'T': 'r10',
-    'J': 'J',
-    'Q': 'Q',
-    'K': 'K'
-}
+// /*----- app's state (variables) -----*/
+var shuffledDeck, playerHand, dealerHand;
+var bankroll, bet;
+var handInProgress;
 
-/*----- app's state (variables) -----*/
-var board, score;
+// /*----- cached element references -----*/
+var playerCardsEl = document.querySelector('#player-section div.cards');
+var playerScoreEl = document.querySelector('#player-section h3');
+var bankrollEl = document.querySelector('#player-section p');
+var dealerCardsEl = document.querySelector('#dealer-section div.cards');
+var dealerScoreEl = document.querySelector('#dealer-section h3');
 
-/*----- cached element references -----*/
-var scoreEl = document.querySelector('h2');
+var betControlEl = document.querySelector('#bet-deal-controls');
+var dealBtnEl = document.querySelector('#deal-btn');
+var hitControlEl = document.querySelector('#hit-stand-controls');
 
-/*----- event listeners -----*/
-// adding chips
-document.getElementById('inc-btn').addEventListener('click', function () {
-    handleUpdateScore(5)
-});
-document.getElementById('inc-btn2').addEventListener('click', function () {
-    handleUpdateScore(10)
-});
+// /*----- event listeners -----*/
+dealBtnEl.addEventListener('click', handleDeal);
+betControlEl.addEventListener('click', betPlaced)
 
-document.getElementById("dealBtn").addEventListener('click', function() {
-    var randomCard = getRandomCard();
-    var playerCards = document.getElementById("playercards");
-    var rank = rankDeck[randomCard[0]]
-    var suit = suitDeck[randomCard[1]]
-    console.log(randomCard)
-    playerCards.innerHTML += '<img src="card-deck-css/images/'+suit+'/'+suit+'-'+rank+'.svg">';
-});
-
-
-
-/*----- functions -----*/
+// /*----- functions -----*/
 function initialize() {
-    board = [];
-    score = 0;
-    // add more state here
-    render();
+  handInProgress = false;
+  bankroll = 1000;
+  bet = 0;
+  render();
 }
 
-function getRandomCard() {
-    return cards[Math.floor(Math.random() * cards.length)];
-}
-
-
-
-// responsible for transfering all state to the DOM (visualization)
 function render() {
-    scoreEl.textContent = score;
+  bankrollEl.textContent = bankroll;
+  betControlEl.style.visibility = handInProgress ? 'hidden' : 'visibile';
+  bet === 0 ? dealBtnEl.setAttribute('disabled', 'disabled') : dealBtnEl.removeAttribute('disabled');
+  hitControlEl.style.visibility = handInProgress ? 'visible' : 'hidden';
+  renderHands();
 }
 
-function handleUpdateScore(diff) {
-    score += diff;
+function betPlaced() {
 
-    render();
+}
+
+function handleDeal() {
+  var tempDeck = masterDeck.slice();
+  shuffledDeck = [];
+  while (tempDeck.length) {
+    var rndIdx = Math.floor(Math.random() * tempDeck.length);
+    shuffledDeck.push(tempDeck.splice(rndIdx, 1)[0]);
+  }
+  handInProgress = true;
+  playerHand = shuffledDeck.splice(0, 2);
+  dealerHand = shuffledDeck.splice(0, 2);
+  render();
+}
+
+function renderHands() {
+  if (!playerHand) return;
+  playerCardsEl.innerHTML = '';
+  // Let's build the cards as a string of HTML
+  var cardsHtml = playerHand.reduce(function (html, card) {
+    return html + `<div class="card ${card.face}"></div>`;
+  }, '');
+  playerCardsEl.innerHTML = cardsHtml;
+  dealerCardsEl.innerHTML = '';
+  // Let's build the cards as a string of HTML
+  var cardsHtml = dealerHand.reduce(function (html, card, idx) {
+    var cardClass = handInProgress && idx === 0 ? 'back-blue' : card.face;
+    return html + `<div class="card ${cardClass}"></div>`;
+  }, '');
+  dealerCardsEl.innerHTML = cardsHtml;
+}
+
+function buildMasterDeck() {
+  var deck = [];
+  suits.forEach(function (suit) {
+    ranks.forEach(function (rank) {
+      deck.push({
+        // the 'face' property maps to the CSS classes for cards
+        face: `${suit}${rank}`,
+        // the 'value' property is set for blackjack, not war
+        value: Number(rank) || (rank === 'A' ? 11 : 10)
+      });
+    });
+  });
+  return deck;
 }
 
 initialize();
