@@ -1,18 +1,4 @@
-table {
-    margin: 70px auto;
-    border-collapse: collapse;
-    display: flex;
-    flex-direction: column;
-}
-
-#container {
-	background-color: white;
-	margin: 1em;
-	padding: 1%;
-	width: 50%;
-	margin-left: 25%;
-}
-
+@charset "UTF-8";
 .card {
   box-sizing: border-box;
   display: inline-block;
