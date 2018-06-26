@@ -1,5 +1,5 @@
 body {
-    background-color: green;
+    background-color: maroon;
 }
 
 h1 {
@@ -23,13 +23,36 @@ h3 {
     color: white;
 }
 
+h4 {
+    font-family: 'Ewert', cursive;
+    text-align: center;
+    color: white;
+    padding: 10px 30px 10px 30px;
+}
+
 section {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding: 30px 0px 0px 0px;
+    padding: 10px 0px 0px 0px;
 }
 
 #hit-stand-controls {
-    padding: 10px 0px 10px 0px;
+    padding: 0px 0px 50px 0px;
+}
+
+#dealer-section {
+    border: 1px solid white;
+    margin: 50px 275px 50px 275px;
+    padding: 50px 50px 50px 50px;
+}
+
+#player-section {
+    border: 1px solid white;
+    margin: 50px 275px 50px 275px;
+    padding: 50px 50px 50px 50px;
+}
+
+#bet-deal-controls {
+    padding: 0px 0px 0px 0px;
 }

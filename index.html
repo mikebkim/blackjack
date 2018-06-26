@@ -12,7 +12,6 @@
 </head>
 
 <body>
-
     <h1>Blackjack</h1>
 
     <div id="bet-deal-controls">
@@ -20,38 +19,40 @@
     </div>
 
     <section id="dealer-section">
-        <h3>Dealer: </h3>
+        <h3>Dealer: <span></span></h3>
+        <h3 class="dealerSum"></h3>
         <div class="cards"></div>
         <h3></h3>
     </section>
 
+    <h3 id="message"></h3>
+
     <section id="player-section">
-        <h3>Player: </h3>
+        <h3>Player: <span></span></h3>
+        <h3 class="playerSum"></h3>
         <div class="cards"></div>
         <h3></h3>
         <p></p>
     </section>
 
-    <div id="hit-stand-controls">
+    <section id="hit-stand-controls">
         <button id="hit-btn">Hit</button>
         <button id="stand-btn">Stand</button>
-    </div>
+    </section>
 
     <section>
         <div>Bet Amount
             <h4 class="bet-amount">0</h4>
-            <div>
-                <button class="bet-five">$5</button>
-                <button class="bet-twentyfive">$25</button>
-                <button class="bet-hundred">$100</button>
+            <div id="bet-btns">
+                <button>$5</button>
+                <button>$25</button>
+                <button>$100</button>
             </div>
         </div>
 
         <div>Funds
-            <h4 class="text-center bankroll"></h4>
-
+            <h4 id="bankroll"></h4>
         </div>
-
     </section>
 </body>
 
