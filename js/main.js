@@ -96,6 +96,7 @@ function shuffleDeck() {
 
 // place bets
 function handleIncreaseBet(evt) {
+  if (evt.target.tagName !== 'BUTTON') return;
   var amt = parseInt(evt.target.textContent.replace('$', ''));
   bet += amt;
   bankroll -= amt;
@@ -117,6 +118,7 @@ function handleDeal() {
   render();
 }
 
+// blackjack check
 function checkForBlackjack() {
   if (playerSum === 21 && dealerSum === 21) {
     winner = 'T';
@@ -124,7 +126,7 @@ function checkForBlackjack() {
     handInProgress = false;
   } else if (playerSum === 21) {
     blackjack = 'P';
-    bankroll = bankroll((bet * 1.5) + (bet * 2));
+    bankroll += ((bet * 1.5) + bet);
     bet = 0;
     handInProgress = false;
   } else if (dealerSum === 21) {
@@ -132,7 +134,6 @@ function checkForBlackjack() {
     handInProgress = false;
     bet = 0;
   }
-  render();
 }
 
 function deal(hand, numCards) {
