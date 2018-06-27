@@ -11,7 +11,7 @@ h1 {
     color: white;
     font-size: 50px;
     text-shadow: 0px 0px 50px white;
-    margin: 20px 0px -20px 0px;
+    margin: 30px 0px -20px 0px;
 }
 
 @keyframes blink {
@@ -25,6 +25,28 @@ h1 {
 
 .blink-message {
     -webkit-animation: blink .3s linear infinite;
+    -moz-animation: blink .3s linear infinite;
+}
+
+h2 {
+    position: absolute;
+    margin-left: 105px;
+    left: 0;
+    font-family: 'Poiret One', cursive;
+    color: white;
+    text-decoration: underline;
+    font-size: 25px;
+}
+
+ul {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: 90px;
+    margin-top: 60px;
+    font-family: 'Poiret One', cursive;
+    color: white;
+    font-size: 20px;
 }
 
 div {
@@ -39,6 +61,7 @@ h3 {
     font-family: 'Poiret One', cursive;
     text-align: center;
     color: white;
+    margin: 48px 0px 0px 0px;
 }
 
 h4 {
@@ -56,24 +79,35 @@ section {
 
 #dealer-section {
     border: 1px solid maroon;
-    margin: 75px 275px 50px 275px;
+    margin: 75px 380px 75px 380px;
     box-shadow: 0px 0px 50px black;
     min-height: 128px;
+    border-radius: 100px;
 }
 
-#message {
-    margin: 0px;
+h5 {
+    font-size: 30px;
+    font-family: 'Poiret One', cursive;
+    text-align: center;
+    color: white;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    margin: -55px;
 }
 
 #player-section {
     border: 1px solid maroon;
-    margin: 75px 275px 50px 275px;
+    margin: 75px 380px 75px 380px;
     box-shadow: 0px 0px 50px black;
     min-height: 128px;
+    border-radius: 100px;
 }
 
 #hit-stand-controls {
-    margin-top: -45px
+    margin-top: -78px
 }
 
 #stand-btn {
@@ -87,6 +121,7 @@ section {
     font-family: 'Poiret One', cursive;
     color: maroon;
     font-weight: bold;
+    font-size: 15px;
 }
 
 #hit-btn {
@@ -100,6 +135,7 @@ section {
     font-family: 'Poiret One', cursive;
     color: maroon;
     font-weight: bold;
+    font-size: 15px;
 }
 
 #deal-btn {
@@ -113,6 +149,7 @@ section {
     font-family: 'Poiret One', cursive;
     color: maroon;
     font-weight: bold;
+    font-size: 15px;
 }
 
 #bet-deal-controls {
@@ -147,4 +184,5 @@ section {
     background-color: maroon;
     border-color: maroon;
     background-repeat: no-repeat;
+    font-family: 'Poiret One', cursive;
 }
