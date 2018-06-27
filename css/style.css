@@ -10,6 +10,21 @@ h1 {
     font-family: 'Poiret One', cursive;
     color: white;
     font-size: 50px;
+    text-shadow: 0px 0px 50px white;
+    margin: 20px 0px -20px 0px;
+}
+
+@keyframes blink {
+    0% {
+        color: white;
+    }
+    100% {
+        color: red;
+    }
+}
+
+.blink-message {
+    -webkit-animation: blink .3s linear infinite;
 }
 
 div {
@@ -30,7 +45,6 @@ h4 {
     font-family: 'Poiret One', cursive;
     text-align: center;
     color: white;
-    padding: 10px 30px 10px 30px;
 }
 
 section {
@@ -40,20 +54,65 @@ section {
     padding: 10px 0px 0px 0px;
 }
 
-#hit-stand-controls {
-    padding: 0px 0px 40px 0px;
+#dealer-section {
+    border: 1px solid maroon;
+    margin: 75px 275px 50px 275px;
+    box-shadow: 0px 0px 50px black;
+    min-height: 128px;
 }
 
-#dealer-section {
-    border: 1px solid white;
-    margin: 50px 275px 50px 275px;
-    padding: 50px 50px 50px 50px;
+#message {
+    margin: 0px;
 }
 
 #player-section {
-    border: 1px solid white;
-    margin: 50px 275px 50px 275px;
-    padding: 50px 50px 50px 50px;
+    border: 1px solid maroon;
+    margin: 75px 275px 50px 275px;
+    box-shadow: 0px 0px 50px black;
+    min-height: 128px;
+}
+
+#hit-stand-controls {
+    margin-top: -45px
+}
+
+#stand-btn {
+    padding: 10px;
+    margin: 15px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-size: 100% auto;
+    box-shadow: 0px 0px 50px red;
+    font-family: 'Poiret One', cursive;
+    color: maroon;
+    font-weight: bold;
+}
+
+#hit-btn {
+    padding: 10px;
+    margin: 15px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-size: 100% auto;
+    box-shadow: 0px 0px 50px red;
+    font-family: 'Poiret One', cursive;
+    color: maroon;
+    font-weight: bold;
+}
+
+#deal-btn {
+    padding: 10px;
+    margin: 15px;
+    border-radius: 50%;
+    height: 60px;
+    width: 60px;
+    background-size: 100% auto;
+    box-shadow: 0px 0px 50px red;
+    font-family: 'Poiret One', cursive;
+    color: maroon;
+    font-weight: bold;
 }
 
 #bet-deal-controls {
@@ -61,22 +120,29 @@ section {
 }
 
 .fivechip {
-    background-image: url('https://i.imgur.com/hMTlUlP.png');
+    background-image: url('https://i.imgur.com/xak0rJl.png');
+    color: black;
 }
 
 .tenchip {
+    background-image: url('https://i.imgur.com/hMTlUlP.png');
+    color: white;
+}
+
+.fiftychip {
     background-image: url('https://i.imgur.com/0eXBMzu.png');
+    color: white;
 }
 
 .hunchip {
     background-image: url('https://i.imgur.com/Y2mZAbe.png');
+    color: white;
 }
 
 .chip {
     height: 60px;
     width: 60px;
     background-size: 100% auto;
-    color: white;
     padding: 15px;
     background-color: maroon;
     border-color: maroon;

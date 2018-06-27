@@ -14,6 +14,7 @@ var cardNoise = new Audio('audio/cardshufflemp3.mp3');
 var cardHit = new Audio('audio/cardshitmp3.mp3');
 var blackjackWin = new Audio('audio/blackjackwinmp3.mp3');
 var playerLose = new Audio('audio/losemp3.mp3');
+var pushNoise = new Audio('audio/pushmp3.mp3');
 
 // /*----- app's state (variables) -----*/
 var shuffledDeck, playerHand, dealerHand;
@@ -61,10 +62,10 @@ function render() {
   playerScoreEl.textContent = playerSum;
   renderHands();
   if (blackjack) {
-    messageEl.textContent = `${nameLookup[blackjack]} Has Blackjack!`;
+    messageEl.textContent = `${nameLookup[blackjack]} Blackjack!`;
   } else if (winner) {
     if (winner === 'T') {
-      messageEl.textContent = `It's a Push`;
+      messageEl.textContent = `Push`;
     } else {
       messageEl.textContent = `${nameLookup[winner]} Wins!`;
     }
@@ -128,6 +129,7 @@ function checkForBlackjack() {
   if (playerSum === 21 && dealerSum === 21) {
     winner = 'T';
     bet = 0;
+    pushNoise.play();
     handInProgress = false;
   } else if (playerSum === 21) {
     blackjack = 'P';
@@ -188,6 +190,7 @@ function handleStand() {
   dealerSum = computeHand(dealerHand);
   if (playerSum === dealerSum) {
     winner = 'T';
+    pushNoise.play();
     bankroll += bet;
   } else if (dealerSum > playerSum && dealerSum < 22) {
     winner = 'D';
