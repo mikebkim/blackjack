@@ -33,8 +33,9 @@ var messageEl = document.getElementById("message");
 // /*----- event listeners -----*/
 dealBtnEl.addEventListener('click', handleDeal);
 document.getElementById('bet-btns').addEventListener('click', handleIncreaseBet);
-hitStandContolEl.addEventListener('click', handleHit);
-// standControlEl.addEventListener('click', handleStand);
+// hitStandContolEl.addEventListener('click', handleHit);
+document.getElementById('hit-btn').addEventListener('click', handleHit);
+document.getElementById('stand-btn').addEventListener('click', handleStand);
 
 // /*----- functions -----*/
 function initialize() {
@@ -83,6 +84,7 @@ function buildMasterDeck() {
   return deck;
 }
 
+// shuffle deck
 function shuffleDeck() {
   var tempDeck = masterDeck.slice();
   shuffledDeck = [];
@@ -117,12 +119,13 @@ function handleDeal() {
 
 function checkForBlackjack() {
   if (playerSum === 21 && dealerSum === 21) {
-    messageEl = `It's a Push`;
-  } else {
-   playerSum === 21
+    winner = 'P';
+  } else if (playerSum === 21) {
+    blackjack = 'P';
+  } else if (dealerSum === 21) {
+    blackjack = 'D';
   }
 }
-
 
 function deal(hand, numCards) {
   hand.push(...shuffledDeck.splice(0, numCards));
@@ -160,6 +163,21 @@ function handleHit() {
 }
 
 // stand
+function handleStand() {
+  // dealer has to hit if < 17
+  // dealer has to stay >= 17
+  // if player and dealer have the same sum of cards 17-21, push
+  dealerPlay();
+}
+
+function dealerPlay() {
+  while (computeHand(dealerHand) < 17) {
+    deal(dealerHand, 1);
+    if (computeHand(dealerHand) >= 17) {
+      handInProgress = false;
+    }
+  }
+}
 
 // render hands
 function renderHands() {
@@ -179,4 +197,9 @@ function renderHands() {
   dealerCardsEl.innerHTML = cardsHtml;
 }
 
+// what is the beginning point of all of this?
 initialize();
+
+
+// find out how to reset the game
+// if player wins, add  bet to funds
