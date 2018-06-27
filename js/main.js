@@ -9,6 +9,12 @@ var nameLookup = {
 
 var masterDeck = buildMasterDeck();
 
+var chipNoise = new Audio('audio/chipnoisemp3.mp3');
+var cardNoise = new Audio('audio/cardshufflemp3.mp3');
+var cardHit = new Audio('audio/cardshitmp3.mp3');
+var blackjackWin = new Audio('audio/blackjackwinmp3.mp3');
+var playerLose = new Audio('audio/losemp3.mp3');
+
 // /*----- app's state (variables) -----*/
 var shuffledDeck, playerHand, dealerHand;
 var playerSum, dealerSum;
@@ -33,7 +39,6 @@ var messageEl = document.getElementById("message");
 // /*----- event listeners -----*/
 dealBtnEl.addEventListener('click', handleDeal);
 document.getElementById('bet-btns').addEventListener('click', handleIncreaseBet);
-// hitStandContolEl.addEventListener('click', handleHit);
 document.getElementById('hit-btn').addEventListener('click', handleHit);
 document.getElementById('stand-btn').addEventListener('click', handleStand);
 
@@ -74,9 +79,7 @@ function buildMasterDeck() {
   suits.forEach(function (suit) {
     ranks.forEach(function (rank) {
       deck.push({
-        // the 'face' property maps to the CSS classes for cards
         face: `${suit}${rank}`,
-        // the 'value' property is set for blackjack, not war
         value: Number(rank) || (rank === 'A' ? 11 : 10)
       });
     });
@@ -100,11 +103,13 @@ function handleIncreaseBet(evt) {
   var amt = parseInt(evt.target.textContent.replace('$', ''));
   bet += amt;
   bankroll -= amt;
+  chipNoise.play();
   render();
 }
 
 // deal hands
 function handleDeal() {
+  cardNoise.play();
   shuffleDeck();
   handInProgress = true;
   winner = blackjack = null;
@@ -128,9 +133,11 @@ function checkForBlackjack() {
     blackjack = 'P';
     bankroll += ((bet * 1.5) + bet);
     bet = 0;
+    blackjackWin.play();
     handInProgress = false;
   } else if (dealerSum === 21) {
     blackjack = 'D';
+    playerLose.play();
     handInProgress = false;
     bet = 0;
   }
@@ -161,10 +168,12 @@ function computeHand(hand) {
 
 // handle hit
 function handleHit() {
+  cardHit.play();
   deal(playerHand, 1);
   playerSum = computeHand(playerHand);
   if (playerSum > 21) {
     winner = 'D';
+    playerLose.play();
     handInProgress = false;
     bet = 0;
   }
@@ -182,9 +191,11 @@ function handleStand() {
     bankroll += bet;
   } else if (dealerSum > playerSum && dealerSum < 22) {
     winner = 'D';
+    playerLose.play();
   } else {
     winner = 'P';
     bankroll += bet * 2;
+    blackjackWin.play();
   }
   bet = 0;
   render();
@@ -203,13 +214,11 @@ function dealerPlay() {
 function renderHands() {
   if (!playerHand) return;
   playerCardsEl.innerHTML = '';
-  // Let's build the cards as a string of HTML
   var cardsHtml = playerHand.reduce(function (html, card) {
     return html + `<div class="card ${card.face}"></div>`;
   }, '');
   playerCardsEl.innerHTML = cardsHtml;
   dealerCardsEl.innerHTML = '';
-  // Let's build the cards as a string of HTML
   var cardsHtml = dealerHand.reduce(function (html, card, idx) {
     var cardClass = handInProgress && idx === 0 ? 'back-blue' : card.face;
     return html + `<div class="card ${cardClass}"></div>`;
