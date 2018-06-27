@@ -49,7 +49,7 @@ function initialize() {
 function render() {
   bankrollEl.textContent = '$' + bankroll;
   playerBetEl.textContent = '$' + bet;
-  betControlEl.style.visibility = handInProgress ? 'hidden' : 'visibile';
+  dealBtnEl.style.visibility = handInProgress ? 'hidden' : 'visible';
   bet === 0 ? dealBtnEl.setAttribute('disabled', 'disabled') : dealBtnEl.removeAttribute('disabled');
   hitStandContolEl.style.visibility = handInProgress ? 'visible' : 'hidden';
   dealerScoreEl.textContent = handInProgress ? '?' : dealerSum;
@@ -119,12 +119,20 @@ function handleDeal() {
 
 function checkForBlackjack() {
   if (playerSum === 21 && dealerSum === 21) {
-    winner = 'P';
+    winner = 'T';
+    bet = 0;
+    handInProgress = false;
   } else if (playerSum === 21) {
     blackjack = 'P';
+    bankroll = bankroll((bet * 1.5) + (bet * 2));
+    bet = 0;
+    handInProgress = false;
   } else if (dealerSum === 21) {
     blackjack = 'D';
+    handInProgress = false;
+    bet = 0;
   }
+  render();
 }
 
 function deal(hand, numCards) {
@@ -164,17 +172,28 @@ function handleHit() {
 
 // stand
 function handleStand() {
-  // dealer has to hit if < 17
-  // dealer has to stay >= 17
-  // if player and dealer have the same sum of cards 17-21, push
+  handInProgress = false;
+  playerSum = computeHand(playerHand);
   dealerPlay();
+  dealerSum = computeHand(dealerHand);
+  if (playerSum === dealerSum) {
+    winner = 'T';
+    bankroll += bet;
+  } else if (dealerSum > playerSum && dealerSum < 22) {
+    winner = 'D';
+  } else {
+    winner = 'P';
+    bankroll += bet * 2;
+  }
+  bet = 0;
+  render();
 }
 
 function dealerPlay() {
   while (computeHand(dealerHand) < 17) {
     deal(dealerHand, 1);
-    if (computeHand(dealerHand) >= 17) {
-      handInProgress = false;
+    if (computeHand(dealerHand) > 21) {
+      winner = 'P';
     }
   }
 }
@@ -197,9 +216,4 @@ function renderHands() {
   dealerCardsEl.innerHTML = cardsHtml;
 }
 
-// what is the beginning point of all of this?
 initialize();
-
-
-// find out how to reset the game
-// if player wins, add  bet to funds

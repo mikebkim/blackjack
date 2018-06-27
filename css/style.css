@@ -4,27 +4,27 @@ body {
 
 h1 {
     text-align: center;
-    font-family: 'Ewert', cursive;
+    font-family: 'Poiret One', cursive;
     color: white;
     font-size: 50px;
 }
 
 div {
     text-align: center;
-    font-family: 'Ewert', cursive;
+    font-family: 'Poiret One', cursive;
     color: white;
     font-size: 20px;
     padding: 0px 10px;
 }
 
 h3 {
-    font-family: 'Ewert', cursive;
+    font-family: 'Poiret One', cursive;
     text-align: center;
     color: white;
 }
 
 h4 {
-    font-family: 'Ewert', cursive;
+    font-family: 'Poiret One', cursive;
     text-align: center;
     color: white;
     padding: 10px 30px 10px 30px;
@@ -55,4 +55,27 @@ section {
 
 #bet-deal-controls {
     padding: 0px 0px 0px 0px;
+}
+
+.fivechip {
+    background-image: url('https://i.imgur.com/hMTlUlP.png');
+}
+
+.tenchip {
+    background-image: url('https://i.imgur.com/0eXBMzu.png');
+}
+
+.hunchip {
+    background-image: url('https://i.imgur.com/Y2mZAbe.png');
+}
+
+.chip {
+    height: 60px;
+    width: 60px;
+    background-size: 100% auto;
+    color: white;
+    padding: 15px;
+    background-color: maroon;
+    border-color: maroon;
+    background-repeat: no-repeat;
 }

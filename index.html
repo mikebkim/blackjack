@@ -7,19 +7,17 @@
     <title>Blackjack</title>
     <link href="css/card-deck-css/css/cardstarter.min.css" rel="stylesheet" />
     <link href="css/style.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Ewert" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
     <script defer src="js/main.js"></script>
 </head>
 
 <body>
     <h1>Blackjack</h1>
 
-    <div id="bet-deal-controls">
-        <button id="deal-btn">Deal</button>
-    </div>
-
     <section id="dealer-section">
-        <h3>Dealer: <span></span></h3>
+        <h3>Dealer:
+            <span></span>
+        </h3>
         <h3 class="dealerSum"></h3>
         <div class="cards"></div>
         <h3></h3>
@@ -28,7 +26,9 @@
     <h3 id="message"></h3>
 
     <section id="player-section">
-        <h3>Player: <span></span></h3>
+        <h3>Player:
+            <span></span>
+        </h3>
         <h3 class="playerSum"></h3>
         <div class="cards"></div>
         <h3></h3>
@@ -44,10 +44,13 @@
         <div>Bet Amount
             <h4 class="bet-amount">0</h4>
             <div id="bet-btns">
-                <button>$5</button>
-                <button>$25</button>
-                <button>$100</button>
+                <button class="chip fivechip">$5</button>
+                <button class="chip tenchip">$25</button>
+                <button class="chip hunchip">$100</button>
             </div>
+        </div>
+        <div id="bet-deal-controls">
+            <button id="deal-btn">Deal</button>
         </div>
 
         <div>Funds
