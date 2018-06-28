@@ -168,6 +168,8 @@ function computeHand(hand) {
   return sum;
 }
 
+// handle double down
+
 // handle hit
 function handleHit() {
   cardHit.play();
