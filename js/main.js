@@ -32,8 +32,6 @@ var dealerCardsEl = document.querySelector('#dealer-section div.cards');
 var dealerScoreEl = document.querySelector('#dealer-section h3 span');
 
 var dealBtnEl = document.querySelector('#deal-btn');
-var disableChipEl = document.getElementsByClassName('chip');
-var enableChipEl = document.getElementsByClassName('chip');
 var hitStandContolEl = document.querySelector('#hit-stand-controls');
 var playerBankroll = document.getElementsByClassName('bankroll')[0];
 
@@ -103,27 +101,13 @@ function shuffleDeck() {
 
 // place bets
 function handleIncreaseBet(evt) {
+  if (handInProgress) return;
   if (evt.target.tagName !== 'BUTTON') return;
   var amt = parseInt(evt.target.textContent.replace('$', ''));
   bet += amt;
   bankroll -= amt;
   chipNoise.play();
   render();
-}
-
-// disable/enable bets
-function disableBets() {
-  for (var i = 0; i < disableChipEl.length; i++) {
-    var chip = disableChipEl[i];
-    chip.disabled = true;
-  }
-}
-
-function enableBets() {
-  for (var i = 0; i < enableChipEl.length; i++) {
-    var chip = enableChipEl[i];
-    chip.disabled = false;
-  }
 }
 
 // deal hands
@@ -138,7 +122,6 @@ function handleDeal() {
   deal(dealerHand, 2);
   playerSum = computeHand(playerHand);
   dealerSum = computeHand(dealerHand);
-  disableBets();
   checkForBlackjack();
   render();
 }
@@ -150,20 +133,17 @@ function checkForBlackjack() {
     bet = 0;
     pushNoise.play();
     handInProgress = false;
-    enableBets();
   } else if (playerSum === 21) {
     blackjack = 'P';
     bankroll += ((bet * 1.5) + bet);
     bet = 0;
     blackjackWin.play();
     handInProgress = false;
-    enableBets();
   } else if (dealerSum === 21) {
     blackjack = 'D';
     playerLose.play();
     handInProgress = false;
     bet = 0;
-    enableBets();
   }
 }
 
@@ -200,7 +180,6 @@ function handleHit() {
     playerLose.play();
     handInProgress = false;
     bet = 0;
-    enableBets();
   }
   render();
 }
@@ -224,7 +203,6 @@ function handleStand() {
     playerWin.play();
   }
   bet = 0;
-  enableBets();
   render();
 }
 
